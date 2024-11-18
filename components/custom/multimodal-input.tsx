@@ -317,10 +317,10 @@ export function MultimodalInput({
         <PaperclipIcon size={14} />
       </Button>
 
-      {/* Agregar la frase al final */}
       <div className="absolute bottom-1 left-1 text-muted-foreground text-xs">
-        Gracias por usar nuestro servicio de chatbot
+        Hecho con ❤️ por LinberAI con talento misionero 🧉
       </div>
     </div>
   );
 }
+
