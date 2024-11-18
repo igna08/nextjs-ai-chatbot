@@ -13,7 +13,7 @@ export const Overview = () => {
       {/* Logo */}
       <div className="flex justify-center items-center mb-6">
         <img
-          src="https://i.postimg.cc/Wzkw3vr5/IMG-20241118-WA0000-removebg-preview.png"
+          src="https://i.postimg.cc/VNGmDyTs/IMG-20241118-WA0000-removebg-preview.png"
           alt="Linber AI"
           className="w-50 h-auto" // Agrandado 125%
         />
