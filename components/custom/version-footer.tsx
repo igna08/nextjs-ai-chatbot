@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 
 import { isAfter } from 'date-fns';
 import { motion } from 'framer-motion';
@@ -56,8 +56,8 @@ export const VersionFooter = ({
             setIsMutating(true);
 
             mutate(
-              /api/document?id=${block.documentId},
-              await fetch(/api/document?id=${block.documentId}, {
+              `/api/document?id=${block.documentId}`,
+              await fetch(`/api/document?id=${block.documentId}`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                   timestamp: getDocumentTimestampByIndex(
@@ -105,3 +105,4 @@ export const VersionFooter = ({
     </motion.div>
   );
 };
+
