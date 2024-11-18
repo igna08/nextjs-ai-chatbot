@@ -225,8 +225,12 @@ export function MultimodalInput({
                 </Button>
               </motion.div>
             ))}
+             <div className="absolute bottom-1 left-1 text-muted-foreground text-xs">
+    Hecho con ❤️ por LinberAI con talento misionero 🧉
+  </div>
           </div>
         )}
+      
 
       <input
         type="file"
@@ -317,10 +321,7 @@ export function MultimodalInput({
         <PaperclipIcon size={14} />
       </Button>
 
-      <div className="absolute bottom-1 left-1 text-muted-foreground text-xs">
-        Hecho con ❤️ por LinberAI con talento misionero 🧉
-      </div>
-    </div>
+
   );
 }
 
