@@ -25,13 +25,13 @@ import { Textarea } from '../ui/textarea';
 const suggestedActions = [
   {
     title: 'What is the weather',
-    label: 'in San Francisco?',
-    action: 'What is the weather in San Francisco?',
+    label: 'in Misiones Argentina?',
+    action: 'What is the weather in Misiones Argentina?',
   },
   {
     title: 'Help me draft an essay',
-    label: 'about Silicon Valley',
-    action: 'Help me draft a short essay about Silicon Valley',
+    label: 'about  IA',
+    action: 'Help me draft a short essay about  IA',
   },
 ];
 
@@ -316,19 +316,11 @@ export function MultimodalInput({
       >
         <PaperclipIcon size={14} />
       </Button>
+
+      {/* Agregar la frase al final */}
+      <div className="absolute bottom-1 left-1 text-muted-foreground text-xs">
+        Gracias por usar nuestro servicio de chatbot
+      </div>
     </div>
   );
 }
-
-
-  return (
-    <div className="relative w-full flex flex-col gap-4">
-      {/* Tu contenido anterior */}
-      {/* Pie de página */}
-      <footer className="text-center mt-4 text-gray-400 text-sm">
-        Hecho con ❤️ por <span className="font-bold">LinberAI</span> con talento misionero 🧉
-      </footer>
-    </div>
-  );
-}
-
