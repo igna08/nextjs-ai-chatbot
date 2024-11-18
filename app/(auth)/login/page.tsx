@@ -42,12 +42,24 @@ export default function Page() {
   return (
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
       <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
+        {/* Logo */}
+        <div className="flex justify-center items-center mb-6">
+          <img
+            src="https://i.postimg.cc/Wzkw3vr5/IMG-20241118-WA0000-removebg-preview.png"
+            alt="LinberAI Logo"
+            className="w-24 h-auto" // Ajusta el tamaño según sea necesario
+          />
+        </div>
+
+        {/* Texto de introducción */}
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Sign In</h3>
           <p className="text-sm text-gray-500 dark:text-zinc-400">
             Use your email and password to sign in
           </p>
         </div>
+
+        {/* Formulario */}
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful}>Sign in</SubmitButton>
           <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
