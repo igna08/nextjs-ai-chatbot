@@ -43,13 +43,13 @@ export default function Page() {
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
       <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
         {/* Logo */}
-        <div className="flex justify-center items-center mb-6">
-          <img
-            src="https://i.postimg.cc/SxxPVXp8/Linber-ai-2-removebg-preview.png"
-            alt="LinberAI Logo"
-            className="w-24 h-auto" // Ajusta el tamaño según sea necesario
-          />
-        </div>
+              <div className="flex justify-center items-center mb-6">
+        <img
+          src="https://i.postimg.cc/SxxPVXp8/Linber-ai-2-removebg-preview.png"
+          alt="Linber AI"
+          className="w-50 h-auto" // Agrandado 125%
+        />
+      </div>
 
         {/* Texto de introducción */}
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
