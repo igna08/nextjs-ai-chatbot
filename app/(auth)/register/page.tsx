@@ -48,7 +48,7 @@ export default function Page() {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <img
-            src="https://i.postimg.cc/Wzkw3vr5/IMG-20241118-WA0000-removebg-preview.png"
+            src="https://i.postimg.cc/SxxPVXp8/Linber-ai-2-removebg-preview.png"
             alt="Linber AI"
             className="w-32 h-auto"
           />
