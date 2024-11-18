@@ -11,16 +11,16 @@ export const Overview = () => {
       transition={{ delay: 0.5 }}
     >
       {/* Logo */}
-      <div className="flex justify-center items-center mb-4">
+      <div className="flex justify-center items-center mb-6">
         <img
           src="https://i.postimg.cc/Wzkw3vr5/IMG-20241118-WA0000-removebg-preview.png"
           alt="Linber AI"
-          className="w-40 h-auto" // Tamaño ajustado del logo
+          className="w-50 h-auto" // Agrandado 125%
         />
       </div>
 
       {/* Frase */}
-      <p className="text-gray-600 text-sm">
+      <p className="text-gray-600 text-base md:text-lg font-semibold">
         Hecho con{' '}
         <span className="text-red-500">
           ❤️ {/* Icono de corazón */}
@@ -43,3 +43,4 @@ export const Overview = () => {
     </motion.div>
   );
 };
+
