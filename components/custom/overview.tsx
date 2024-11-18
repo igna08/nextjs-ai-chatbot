@@ -12,7 +12,7 @@ export const Overview = () => {
     >
       <div className="flex justify-center items-center">
         <img
-          src="https://i.postimg.cc/qRD2Mny4/Linber-ai-1-removebg-preview.png"
+          src="https://i.postimg.cc/Wzkw3vr5/IMG-20241118-WA0000-removebg-preview.png"
           alt="Linber AI"
           className="max-w-full h-auto"
         />
