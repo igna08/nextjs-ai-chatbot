@@ -30,8 +30,8 @@ const suggestedActions = [
   },
   {
     title: 'Help me draft an essay',
-    label: 'about of IA',
-    action: 'Help me draft a short essay about the IA',
+    label: 'about  IA',
+    action: 'Help me draft a short essay about  IA',
   },
 ];
 
