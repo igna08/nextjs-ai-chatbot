@@ -102,6 +102,25 @@ export const VersionFooter = ({
           Back to latest version
         </Button>
       </div>
+
+      {/* Footer: Frase adicional */}
+      <div className="mt-4 w-full text-center border-t pt-4 text-sm text-gray-500 dark:text-gray-400">
+        Hecho con{' '}
+        <span className="text-red-500">❤️</span> por{' '}
+        <a
+          href="https://linberai.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-bold text-blue-600 hover:underline"
+        >
+          LinberAI
+        </a>{' '}
+        con talento misionero{' '}
+        <span role="img" aria-label="Misiones">
+          🧉
+        </span>
+      </div>
     </motion.div>
   );
 };
+
