@@ -1,3 +1,40 @@
+'use client';
+
+import { Attachment, ChatRequestOptions, CreateMessage, Message } from 'ai';
+import cx from 'classnames';
+import { motion } from 'framer-motion';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+  ChangeEvent,
+} from 'react';
+import { toast } from 'sonner';
+import { useLocalStorage, useWindowSize } from 'usehooks-ts';
+
+import { sanitizeUIMessages } from '@/lib/utils';
+
+import { ArrowUpIcon, PaperclipIcon, StopIcon } from './icons';
+import { PreviewAttachment } from './preview-attachment';
+import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
+
+const suggestedActions = [
+  {
+    title: 'What is the weather',
+    label: 'in San Francisco?',
+    action: 'What is the weather in San Francisco?',
+  },
+  {
+    title: 'Help me draft an essay',
+    label: 'about Silicon Valley',
+    action: 'Help me draft a short essay about Silicon Valley',
+  },
+];
+
 export function MultimodalInput({
   chatId,
   input,
@@ -57,10 +94,13 @@ export function MultimodalInput({
   useEffect(() => {
     if (textareaRef.current) {
       const domValue = textareaRef.current.value;
+      // Prefer DOM value over localStorage to handle hydration
       const finalValue = domValue || localStorageInput || '';
       setInput(finalValue);
       adjustHeight();
     }
+    // Only run once after hydration
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -128,6 +168,7 @@ export function MultimodalInput({
   const handleFileChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(event.target.files || []);
+
       setUploadQueue(files.map((file) => file.name));
 
       try {
@@ -169,6 +210,7 @@ export function MultimodalInput({
                   variant="ghost"
                   onClick={async () => {
                     window.history.replaceState({}, '', `/chat/${chatId}`);
+
                     append({
                       role: 'user',
                       content: suggestedAction.action,
@@ -200,6 +242,7 @@ export function MultimodalInput({
           {attachments.map((attachment) => (
             <PreviewAttachment key={attachment.url} attachment={attachment} />
           ))}
+
           {uploadQueue.map((filename) => (
             <PreviewAttachment
               key={filename}
@@ -262,17 +305,10 @@ export function MultimodalInput({
         </Button>
       )}
 
-      <Button
-        className="rounded-full p-1.5 h-fit absolute bottom-2 right-11 m-0.5 dark:border-zinc-700"
-        onClick={(event) => {
-          event.preventDefault();
-          fileInputRef.current?.click();
-        }}
-        variant="outline"
-        disabled={isLoading}
-      >
-        <PaperclipIcon size={14} />
-      </Button>
+      {/* This is the fixed footer text */}
+      <div className="absolute bottom-0 left-0 w-full bg-black text-white text-center py-2">
+        Hecho con ❤️ por LinberAI con talento misionero 🧉
+      </div>
     </div>
   );
 }
