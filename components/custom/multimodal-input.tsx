@@ -305,10 +305,17 @@ export function MultimodalInput({
         </Button>
       )}
 
-      {/* This is the fixed footer text */}
-      <div className="absolute bottom-0 left-0 w-full bg-black text-white text-center py-2">
-        Hecho con ❤️ por LinberAI con talento misionero 🧉
-      </div>
+      <Button
+        className="rounded-full p-1.5 h-fit absolute bottom-2 right-11 m-0.5 dark:border-zinc-700"
+        onClick={(event) => {
+          event.preventDefault();
+          fileInputRef.current?.click();
+        }}
+        variant="outline"
+        disabled={isLoading}
+      >
+        <PaperclipIcon size={14} />
+      </Button>
     </div>
   );
 }
