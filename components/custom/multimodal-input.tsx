@@ -25,13 +25,13 @@ import { Textarea } from '../ui/textarea';
 const suggestedActions = [
   {
     title: 'What is the weather',
-    label: 'in San Francisco?',
-    action: 'What is the weather in San Francisco?',
+    label: 'in Misiones Argentina?',
+    action: 'What is the weather in Misiones Argentina?',
   },
   {
     title: 'Help me draft an essay',
-    label: 'about Silicon Valley',
-    action: 'Help me draft a short essay about Silicon Valley',
+    label: 'about  IA',
+    action: 'Help me draft a short essay about  IA',
   },
 ];
 
@@ -82,7 +82,7 @@ export function MultimodalInput({
   const adjustHeight = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 2}px`;
+      textareaRef.current.style.height = ${textareaRef.current.scrollHeight + 2}px;
     }
   };
 
@@ -116,7 +116,7 @@ export function MultimodalInput({
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
   const submitForm = useCallback(() => {
-    window.history.replaceState({}, '', `/chat/${chatId}`);
+    window.history.replaceState({}, '', /chat/${chatId});
 
     handleSubmit(undefined, {
       experimental_attachments: attachments,
@@ -142,7 +142,7 @@ export function MultimodalInput({
     formData.append('file', file);
 
     try {
-      const response = await fetch(`/api/files/upload`, {
+      const response = await fetch(/api/files/upload, {
         method: 'POST',
         body: formData,
       });
@@ -209,7 +209,7 @@ export function MultimodalInput({
                 <Button
                   variant="ghost"
                   onClick={async () => {
-                    window.history.replaceState({}, '', `/chat/${chatId}`);
+                    window.history.replaceState({}, '', /chat/${chatId});
 
                     append({
                       role: 'user',
