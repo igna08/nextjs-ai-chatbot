@@ -1,5 +1,7 @@
 import { openai } from '@ai-sdk/openai';
 import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
+
+import { customMiddleware } from './custom-middleware';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const customMiddleware = {
@@ -13,6 +15,6 @@ export const customMiddleware = {
 export const customModel = (apiIdentifier: string) => {
   return wrapLanguageModel({
     model: openai(apiIdentifier),
-    middleware: customMiddleware as unknown as Experimental_LanguageModelV1Middleware, // Asegúrate de que coincida con el tipo esperado
+    middleware: customMiddleware , // Asegúrate de que coincida con el tipo esperado
   });
 };
