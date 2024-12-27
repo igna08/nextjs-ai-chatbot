@@ -2,19 +2,18 @@ import { openai } from '@ai-sdk/openai';
 import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
 
 import { customMiddleware } from './custom-middleware';
-import { NextRequest, NextResponse } from 'next/server';
 
-export const customMiddleware = {
-  async fetch(req: NextRequest): Promise<NextResponse> {
-    const response = await fetch(req); // Llama al modelo AI
-    const data = await response.json(); // Obtiene la respuesta sin modificarla
-    return NextResponse.json(data); // Devuelve la respuesta original
-  }
-};
-
+// Configuración del modelo personalizado
 export const customModel = (apiIdentifier: string) => {
+  // Envuelve el modelo OpenAI con middleware personalizable
   return wrapLanguageModel({
     model: openai(apiIdentifier),
-    middleware: customMiddleware , // Asegúrate de que coincida con el tipo esperado
+    middleware: async (input, next) => {
+      // Llama a la siguiente función sin modificar la respuesta
+      const response = await next(input);
+      
+      // Retorna la respuesta tal cual, sin modificaciones
+      return response;
+    }
   });
 };
