@@ -3,7 +3,7 @@ import { Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware } f
 
 import { customMiddleware } from './custom-middleware';
 
-export const yourGuardrailMiddleware = (apiIdentifier: string) => {
+export const customMiddleware = (apiIdentifier: string) => {
   return wrapLanguageModel({
     model: openai(apiIdentifier),
     middleware: yourGuardrailMiddleware,
