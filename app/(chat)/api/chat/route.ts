@@ -112,7 +112,7 @@ export async function POST(request: Request) {
         },
       },
       createDocument: {
-        description: 'Create a document for a writing activity',
+        description: 'Create a legal document specifically for what the user is asking for.',
         parameters: z.object({
           title: z.string(),
         }),
@@ -138,7 +138,7 @@ export async function POST(request: Request) {
           const { fullStream } = await streamText({
             model: customModel(model.apiIdentifier),
             system:
-              'Write about the given topic. Markdown is supported. Use headings wherever appropriate.',
+              'Write exactly what the user asks you without any explanation. If he asks you for a legal document, write exactly that without any explanation.',
             prompt: title,
           });
 
