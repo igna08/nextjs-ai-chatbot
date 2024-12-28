@@ -202,7 +202,7 @@ export async function POST(request: Request) {
           const { fullStream } = await streamText({
             model: customModel(model.apiIdentifier),
             system:
-              'You are a helpful writing assistant. Based on the description, please update the piece of writing.',
+              'You are a helpful legal writing assistant. Based on the description, please update the piece of writing.',
             experimental_providerMetadata: {
               openai: {
                 prediction: {
