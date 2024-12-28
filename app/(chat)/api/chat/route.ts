@@ -112,9 +112,10 @@ export async function POST(request: Request) {
         },
       },
       createDocument: {
-        description: 'Create a legal document specifically for what the user is asking for and taking the data that he gave you.',
+          description: 'Crea un documento legal basado en los datos proporcionados por el usuario.',
         parameters: z.object({
-          title: z.string(),
+           title: z.string().describe('El título del documento legal que se va a generar'),
+
         }),
         execute: async ({ title }) => {
           const id = generateUUID();
@@ -138,7 +139,7 @@ export async function POST(request: Request) {
           const { fullStream } = await streamText({
             model: customModel(model.apiIdentifier),
             system:
-              'Write exactly what the user asks you without any explanation. If he asks you for a legal document, write exactly that without any explanation.',
+              'Eres un asistente especializado en redacción legal. Crea exclusivamente documentos legales, respetando los estándares formales y asegurando la precisión. No incluyas explicaciones o contenido adicional.',
             prompt: title,
           });
 
@@ -170,7 +171,7 @@ export async function POST(request: Request) {
           return {
             id,
             title,
-            content: `A document was created and is now visible to the user.`,
+            content: `El documento legal ha sido generado exitosamente y está disponible para el usuario.`,
           };
         },
       },
