@@ -1,10 +1,10 @@
-importar  {  openai  }  desde  '@ai-sdk/openai' ;
-importar  {  experimental_wrapLanguageModel  como  wrapLanguageModel  }  de  'ai' ;
+import  {  openai  }  from  '@ai-sdk/openai' ;
+import  {  experimental_wrapLanguageModel  como  wrapLanguageModel  }  from  'ai' ;
 
-importar  {  customMiddleware  }  desde  './custom-middleware' ;
+import  {  customMiddleware  }  from  './custom-middleware' ;
 
-exportar  const  customModel  =  ( apiIdentifier : string )  =>  {
-  devolver  wrapLanguageModel ( {
+export  const  customModel  =  ( apiIdentifier : string )  =>  {
+  return  wrapLanguageModel ( {
     modelo : openai ( apiIdentifier ) ,
     middleware : middleware personalizado ,
   } ) ;
