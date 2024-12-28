@@ -1,21 +1,16 @@
-import { Experimental_LanguageModelV1Middleware } from 'ai';
+import type { Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware } from 'ai';
 
-export const customMiddleware:  LanguageModelV1Middleware = {
-  transformParams: async ({ params }) => {
-    const lastUserMessageText = getLastUserMessageText({
-      prompt: params.prompt,
-    });
+export const yourGuardrailMiddleware: LanguageModelV1Middleware = {
+  wrapGenerate: async ({ doGenerate }) => {
+    const { text, ...rest } = await doGenerate();
 
-    if (lastUserMessageText == null) {
-      return params; // do not use RAG (send unmodified parameters)
-    }
+    // filtering approach, e.g. for PII or other sensitive information:
+    const cleanedText = text?.replace(/badword/g, '<REDACTED>');
 
-    const instruction =
-      'Use the following information to answer the question:\n' +
-      findSources({ text: lastUserMessageText })
-        .map(chunk => JSON.stringify(chunk))
-        .join('\n');
-
-    return addToLastUserMessage({ params, text: instruction });
+    return { text: cleanedText, ...rest };
   },
+
+  // here you would implement the guardrail logic for streaming
+  // Note: streaming guardrails are difficult to implement, because
+  // you do not know the full content of the stream until it's finished.
 };
