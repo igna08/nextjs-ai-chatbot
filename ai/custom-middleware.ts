@@ -1,6 +1,6 @@
-import type { Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware } from 'ai';
+import type { Experimental_LanguageModelV1Middleware  } from 'ai';
 
-export const customMiddleware: LanguageModelV1Middleware = {
+export const customMiddleware: Experimental_LanguageModelV1Middleware  = {
   wrapGenerate: async ({ doGenerate }) => {
     const { text, ...rest } = await doGenerate();
 
