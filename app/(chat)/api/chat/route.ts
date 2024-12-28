@@ -112,7 +112,7 @@ export async function POST(request: Request) {
         },
       },
       createDocument: {
-        description: 'Create a legal document specifically for what the user is asking for.',
+        description: 'Create a legal document specifically for what the user is asking for and taking the data that he gave you.',
         parameters: z.object({
           title: z.string(),
         }),
