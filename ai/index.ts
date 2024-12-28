@@ -6,6 +6,6 @@ import { customMiddleware } from './custom-middleware';
 export const customModel  = (apiIdentifier: string) => {
   return LanguageModelV1Middleware({
     model: openai(apiIdentifier),
-    middleware: yourGuardrailMiddleware,
+    middleware: customMiddleware ,
   });
 };
