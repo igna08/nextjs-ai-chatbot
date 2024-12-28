@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import type { Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware } from 'ai';
+import { Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware } from 'ai';
 
 import { customMiddleware } from './custom-middleware';
 
