@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import  {  models  }  de  '@/ai/models' ;
+import  {  models  }  from  '@/ai/models' ;
 
 export const customModel = (apiIdentifier: string) => {
   return {
