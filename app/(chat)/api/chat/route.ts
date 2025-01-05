@@ -6,7 +6,7 @@ import {
   streamText,
 } from 'ai';
 import { z } from 'zod';
-
+import { openai } from '@ai-sdk/openai';
 import { customModel } from '@/ai';
 import { models } from '@/ai/models';
 import { systemPrompt } from '@/ai/prompts';
