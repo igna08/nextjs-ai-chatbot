@@ -1,13 +1,7 @@
 import { openai } from '@ai-sdk/openai';
-
-import {
-  convertToCoreMessages,
-  Message,
-  StreamData,
-  streamObject,
-  streamText,
-} from 'ai';
+import { convertToCoreMessages, Message, StreamData, streamObject, streamText } from 'ai';
 import { z } from 'zod';
+
 import { customModel } from '@/ai';
 import { models } from '@/ai/models';
 import { systemPrompt } from '@/ai/prompts';
@@ -22,11 +16,7 @@ import {
   saveSuggestions,
 } from '@/db/queries';
 import { Suggestion } from '@/db/schema';
-import {
-  generateUUID,
-  getMostRecentUserMessage,
-  sanitizeResponseMessages,
-} from '@/lib/utils';
+import { generateUUID, getMostRecentUserMessage, sanitizeResponseMessages } from '@/lib/utils';
 
 import { generateTitleFromUserMessage } from '../../actions';
 
