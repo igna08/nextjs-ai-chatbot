@@ -91,7 +91,7 @@ export async function POST(request: Request) {
   const streamingData = new StreamData();
 
   const result = await streamText({
-    model : openai ( apiIdentifier ) ,  // Línea corregida
+    model: openai(model.apiIdentifier), // Use model.apiIdentifier
     system: systemPrompt,
     messages: coreMessages,
     maxSteps: 5,
