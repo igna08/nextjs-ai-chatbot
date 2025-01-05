@@ -10,6 +10,7 @@
   "rules": {
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "off",
+    "@next/next/no-img-element": "warn", // Change to "warn" or "off"
     "import/order": [
       "error",
       {
