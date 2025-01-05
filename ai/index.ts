@@ -2,6 +2,14 @@ import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { models, DEFAULT_MODEL_NAME } from './models'; // Ajusta el path si es necesario
 
+// Definición de customModel (puedes personalizarlo según tus necesidades)
+export const customModel = {
+  id: 'custom-id',
+  label: 'Custom Model',
+  apiIdentifier: 'custom-api-id',
+  description: 'This is a custom model definition',
+};
+
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
@@ -12,13 +20,14 @@ export async function POST(req: Request) {
   const defaultModel = models.find((model) => model.id === DEFAULT_MODEL_NAME);
 
   if (!defaultModel) {
-    throw new Error(`Modelo predeterminado no encontrado: ${DEFAULT_MODEL_NAME}`);
+    console.error(`Modelo predeterminado no encontrado: ${DEFAULT_MODEL_NAME}`);
+    return new Response('Modelo predeterminado no encontrado', { status: 500 });
   }
 
   try {
     // Maneja la promesa devuelta por streamText
     const result = await streamText({
-      model: openai(defaultModel.apiIdentifier),
+      model: openai(defaultModel.apiIdentifier), // Usa el modelo predeterminado
       messages,
     });
 
