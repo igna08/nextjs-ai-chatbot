@@ -1,7 +1,7 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 
-const { textStream } = streamText({
+export const customModel = (apiIdentifier: string) => {
   model: openai('gpt-4-turbo'),
 });
 
