@@ -138,7 +138,7 @@ export async function POST(request: Request) {
           });
 
           const { fullStream } = await streamText({
-            model: customModel(model.apiIdentifier),
+            model: openai(model.apiIdentifier), // Corrected line
             system:
               'Eres un asistente especializado en redacción legal. Crea exclusivamente documentos legales, respetando los estándares formales y asegurando la precisión. No incluyas explicaciones o contenido adicional.',
             prompt: title,
@@ -202,7 +202,7 @@ export async function POST(request: Request) {
           });
 
           const { fullStream } = await streamText({
-            model: customModel(model.apiIdentifier),
+            model: openai(model.apiIdentifier), // Corrected line
             system:
               'You are a helpful legal writing assistant. Based on the description, please update the piece of writing and taking the data that he gave you.',
             experimental_providerMetadata: {
