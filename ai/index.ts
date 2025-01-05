@@ -1,8 +1,17 @@
+
 import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { streamText } from 'ai';
+
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
 
 export const customModel = (apiIdentifier: string) => {
-  return generateText({
+  const { messages } = await req.json();
+
+  const result = streamText({
     model: openai(apiIdentifier),
+    messages,
   });
-};
+
+  return result.toDataStreamResponse();
+}
