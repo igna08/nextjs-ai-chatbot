@@ -1,8 +1,8 @@
 'use server';
 
+import { openai } from '@ai-sdk/openai';
 import { CoreMessage, CoreUserMessage, generateText } from 'ai';
 import { cookies } from 'next/headers';
-import { openai } from '@ai-sdk/openai';
 
 import { customModel } from '@/ai';
 
