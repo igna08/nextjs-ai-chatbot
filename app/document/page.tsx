@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import DocumentoCard from "@/components/custom/Documentos/DocumentoCard";
 import Buscador from "@/components/custom/Documentos/Buscador";
 import axios from "axios";
+import { DocumentSkeleton } from "@/components/custom/document-skeleton"; // Importar el Skeleton
+import { DocumentToolResult } from "@/components/custom/document"; // Importar DocumentToolResult
 
 interface Documento {
   id: string;
@@ -43,16 +45,17 @@ export default function Biblioteca() {
       <Buscador searchQuery={searchQuery} onSearch={setSearchQuery} />
       <div className="documentos-grid">
         {loading ? (
-          <p>Cargando documentos...</p>
+          // Mostrar skeleton mientras cargan los documentos
+          <DocumentSkeleton />
         ) : filteredDocumentos.length > 0 ? (
           filteredDocumentos.map((doc) => (
-            <DocumentoCard
+            // Utilizar DocumentToolResult para una vista más detallada
+            <DocumentToolResult
               key={doc.id}
-              id={doc.id}
-              nombre={doc.title} // Cambié 'nombre' por 'title'
-              fecha_creacion={doc.createdAt} // Cambié 'fecha_creacion' por 'createdAt'
-              tipo={doc.content} // Si necesitas el tipo, puedes ajustarlo aquí según lo que desees
-              url_archivo={doc.userId} // Asegúrate de cambiar esto a la URL correspondiente
+              type="create" // O el tipo correspondiente que quieras asignar
+              result={doc}
+              block={{}} // Ajusta el valor de 'block' según tu lógica
+              setBlock={() => {}} // Ajusta la función de 'setBlock' según tu necesidad
             />
           ))
         ) : (
@@ -62,3 +65,4 @@ export default function Biblioteca() {
     </div>
   );
 }
+
