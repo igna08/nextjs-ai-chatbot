@@ -54,7 +54,11 @@ export default function Biblioteca() {
               key={doc.id}
               type="create" // O el tipo correspondiente que quieras asignar
               result={doc}
-              block={{}} // Ajusta el valor de 'block' según tu lógica
+              block={{
+                title: doc.title,         // Título del documento
+                documentId: doc.id,       // ID del documento
+                content: doc.content,     // Contenido del documento
+                isVisible: true,          // Puede ser un valor basado en alguna condición
               setBlock={() => {}} // Ajusta la función de 'setBlock' según tu necesidad
             />
           ))
