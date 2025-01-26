@@ -7,10 +7,10 @@ import axios from "axios";
 
 interface Documento {
   id: string;
-  nombre: string;
-  fecha_creacion: string;
-  tipo: string;
-  url_archivo: string;
+  title: string;
+  content: string;
+  userId: string;
+  createdAt: string; // Usamos un string para la fecha si la API devuelve la fecha como string
 }
 
 export default function Biblioteca() {
