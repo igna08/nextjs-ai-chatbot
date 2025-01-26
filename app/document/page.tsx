@@ -36,6 +36,11 @@ export default function Biblioteca() {
     }
   };
 
+  // Función para manejar la búsqueda
+  const handleSearch = (query: string) => {
+    setSearchQuery(query); // Actualiza el estado searchQuery
+  };
+
   const filteredDocumentos = documentos.filter((doc) =>
     doc.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -43,8 +48,8 @@ export default function Biblioteca() {
   return (
     <div className="biblioteca-container">
       <h1>Biblioteca de Documentos</h1>
-      {/* Asegúrate de que onSearch esté actualizando searchQuery correctamente */}
-      <Buscador searchQuery={searchQuery} onSearch={(query) => setSearchQuery(query)} />
+      {/* Pasa handleSearch como onSearch */}
+      <Buscador searchQuery={searchQuery} onSearch={handleSearch} />
 
       {selectedDoc ? (
         <Editor
