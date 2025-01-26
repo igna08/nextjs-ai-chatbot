@@ -61,21 +61,21 @@ export default function Biblioteca() {
             <DocumentSkeleton />
           ) : filteredDocumentos.length > 0 ? (
             filteredDocumentos.map((doc) => (
-              <DocumentToolResult
-                key={doc.id}
-                type="create"
-                result={doc}
-                block={{
-                  documentId: doc.id,
-                  content: doc.content,
-                  title: doc.title,
-                  isVisible: true,
-                  status: 'idle',
-                  boundingBox: { top: 0, left: 0, width: 0, height: 0 },
-                }}
-                setBlock={(value) => {}}
-                onClick={() => setSelectedDoc(doc)} // Al hacer clic en un documento, se actualiza el estado
-              />
+              <div key={doc.id} onClick={() => setSelectedDoc(doc)}>  {/* Contenedor para el onClick */}
+                <DocumentToolResult
+                  type="create"
+                  result={doc}
+                  block={{
+                    documentId: doc.id,
+                    content: doc.content,
+                    title: doc.title,
+                    isVisible: true,
+                    status: 'idle',
+                    boundingBox: { top: 0, left: 0, width: 0, height: 0 },
+                  }}
+                  setBlock={(value) => {}}
+                />
+              </div>
             ))
           ) : (
             <p>No se encontraron documentos.</p>
@@ -85,4 +85,3 @@ export default function Biblioteca() {
     </div>
   );
 }
-
