@@ -10,7 +10,7 @@ interface Documento {
   title: string;
   content: string;
   userId: string;
-  createdAt: string; // Usamos un string para la fecha si la API devuelve la fecha como string
+  createdAt: string; // O puedes usar Date si lo prefieres
 }
 
 export default function Biblioteca() {
@@ -34,7 +34,7 @@ export default function Biblioteca() {
   };
 
   const filteredDocumentos = documentos.filter((doc) =>
-    doc.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+    doc.title.toLowerCase().includes(searchQuery.toLowerCase()) // Cambio 'nombre' por 'title'
   );
 
   return (
@@ -49,10 +49,10 @@ export default function Biblioteca() {
             <DocumentoCard
               key={doc.id}
               id={doc.id}
-              nombre={doc.nombre}
-              fecha_creacion={doc.fecha_creacion}
-              tipo={doc.tipo}
-              url_archivo={doc.url_archivo}
+              nombre={doc.title} // Cambié 'nombre' por 'title'
+              fecha_creacion={doc.createdAt} // Cambié 'fecha_creacion' por 'createdAt'
+              tipo={doc.content} // Si necesitas el tipo, puedes ajustarlo aquí según lo que desees
+              url_archivo={doc.userId} // Asegúrate de cambiar esto a la URL correspondiente
             />
           ))
         ) : (
