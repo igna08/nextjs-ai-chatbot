@@ -26,7 +26,7 @@ const Buscador: React.FC<BuscadorProps> = ({ searchQuery, onSearch }) => {
         type="text"
         placeholder="Buscar documentos..."
         value={searchQuery}
-        onChange={(e) => onSearch(e.target.value)}
+        onChange={(e) => onSearch(e.target.value)} // Actualiza searchQuery en cada cambio
         onKeyDown={handleKeyDown}
         style={{
           flex: 1, // Ocupa todo el espacio disponible
