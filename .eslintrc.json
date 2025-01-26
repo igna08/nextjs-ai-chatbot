@@ -10,26 +10,8 @@
   "rules": {
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "off",
-    "@next/next/no-img-element": "warn", // Change to "warn" or "off"
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling"],
-          "index",
-          "object",
-          "type"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
+    "@next/next/no-img-element": "warn",
+    "import/order": "off" // Desactiva la regla de orden de importaciones
   },
   "settings": {
     "import/resolver": {
@@ -40,3 +22,4 @@
   },
   "ignorePatterns": ["**/components/ui/**"]
 }
+
