@@ -7,7 +7,7 @@ import axios from "axios";
 import { DocumentSkeleton } from "@/components/custom/document-skeleton"; // Importar el Skeleton
 import { DocumentToolResult } from "@/components/custom/document"; // Importar DocumentToolResult
 import { Editor } from "@/components/custom/editor";  // Importar el Editor
-import { BotIcon } from "@/components/ui/icons"; // Import > get the BotIcon component
+import { BotIcon } from "@/components/custom/icons"; // Import > get the BotIcon component
 
 interface Documento {
   id: string;
