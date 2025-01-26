@@ -52,14 +52,17 @@ export default function Biblioteca() {
             // Utilizar DocumentToolResult para una vista más detallada
             <DocumentToolResult
               key={doc.id}
-              type="create" // O el tipo correspondiente que quieras asignar
+              type="create"
               result={doc}
               block={{
-                title: doc.title,         // Título del documento
-                documentId: doc.id,       // ID del documento
-                content: doc.content,     // Contenido del documento
-                isVisible: true,          // Puede ser un valor basado en alguna condición
-              setBlock={() => {}} // Ajusta la función de 'setBlock' según tu necesidad
+                documentId: doc.id,        // ID del documento
+                content: doc.content,      // Contenido del documento
+                title: doc.title,          // Título del documento
+                isVisible: true,           // Puedes ajustarlo según tu lógica (por ejemplo, con un estado)
+                status: 'idle',            // Ajusta el estado según corresponda
+                boundingBox: { top: 0, left: 0, width: 0, height: 0 }, // Puedes ajustar el boundingBox basado en el evento onClick
+              }}
+              setBlock={(value) => {}} // Implementa la función setBlock según tus necesidades
             />
           ))
         ) : (
