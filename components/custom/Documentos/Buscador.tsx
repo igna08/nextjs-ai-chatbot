@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, buttonVariants } from '@/components/ui/Button'; // Importa el componente Button y sus variantes
 
 interface BuscadorProps {
   searchQuery: string;
@@ -19,17 +20,32 @@ const Buscador: React.FC<BuscadorProps> = ({ searchQuery, onSearch }) => {
   };
 
   return (
-    <div className="search-bar" style={{ marginBottom: '20px' }}> {/* Espaciado con margen inferior */}
+    <div className="search-bar" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+      {/* Input de búsqueda */}
       <input
         type="text"
         placeholder="Buscar documentos..."
         value={searchQuery}
         onChange={(e) => onSearch(e.target.value)}
-        onKeyDown={handleKeyDown} // Agregar el manejador de teclas
+        onKeyDown={handleKeyDown}
+        style={{
+          flex: 1, // Ocupa todo el espacio disponible
+          padding: '8px 12px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          fontSize: '14px',
+          marginRight: '10px', // Espaciado entre el input y el botón
+        }}
       />
-      <button onClick={handleSearchClick} style={{ marginLeft: '10px' }}> {/* Espaciado entre el input y el botón */}
+
+      {/* Botón de búsqueda personalizado */}
+      <Button
+        variant="default" // Puedes cambiar la variante según tus necesidades
+        size="default" // Puedes cambiar el tamaño según tus necesidades
+        onClick={handleSearchClick}
+      >
         Buscar
-      </button>
+      </Button>
     </div>
   );
 };
