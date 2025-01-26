@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
-import { getAllDocuments } from "@/db/queries"; // Importar la conexión de drizzle
-import { Document } from "@/db/schema"; // Importar el esquema de la tabla 'documentos'
+import { getAllDocuments } from "@/db/queries"; // Importar la función que obtiene todos los documentos
 
 export async function GET() {
   try {
-    // Usamos drizzle-orm para seleccionar los documentos ordenados por fecha_creacion
-    const documentos = await db
-      .select()
-      .from(document) // Accede a la tabla 'documentos'
-      .orderBy("fecha_creacion", "desc");
+    // Llamamos a la función que ya definiste para obtener los documentos
+    const documentos = await getAllDocuments();
 
     // Devuelve los documentos en formato JSON
     return NextResponse.json(documentos);
