@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "../../lib/db"; // Importar la conexión de drizzle
+import { db } from "@/db/queries"; // Importar la conexión de drizzle
 import { Document } from "@/db/schema"; // Importar el esquema de la tabla 'documentos'
 
 export async function GET() {
