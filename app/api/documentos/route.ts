@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
-import { Pool } from "pg";
-
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: Number(process.env.DB_PORT),
-});
+import { db } from "../../lib/db"; // Importar la conexión de drizzle
+import { document } from "../../lib/schema"; // Importar el esquema de la tabla 'documentos'
 
 export async function GET() {
   try {
-    const result = await pool.query("SELECT * FROM documentos ORDER BY fecha_creacion DESC");
-    return NextResponse.json(result.rows);
+    // Usamos drizzle-orm para seleccionar los documentos ordenados por fecha_creacion
+    const documentos = await db
+      .select()
+      .from(document) // Accede a la tabla 'documentos'
+      .orderBy("fecha_creacion", "desc");
+
+    // Devuelve los documentos en formato JSON
+    return NextResponse.json(documentos);
   } catch (error) {
+    // Si ocurre un error, lo mostramos en la consola y devolvemos un error 500
     console.error("Error al obtener documentos:", error);
     return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
   }
