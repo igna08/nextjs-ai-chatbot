@@ -6,6 +6,7 @@ import Buscador from "@/components/custom/Documentos/Buscador";
 import axios from "axios";
 import { DocumentSkeleton } from "@/components/custom/document-skeleton"; // Importar el Skeleton
 import { DocumentToolResult } from "@/components/custom/document"; // Importar DocumentToolResult
+import { Editor } from "@/components/custom/editor";  // Importar el Editor
 
 interface Documento {
   id: string;
@@ -19,6 +20,7 @@ export default function Biblioteca() {
   const [searchQuery, setSearchQuery] = useState("");
   const [documentos, setDocumentos] = useState<Documento[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDoc, setSelectedDoc] = useState<Documento | null>(null); // Estado para el documento seleccionado
 
   useEffect(() => {
     fetchDocumentos();
@@ -36,39 +38,50 @@ export default function Biblioteca() {
   };
 
   const filteredDocumentos = documentos.filter((doc) =>
-    doc.title.toLowerCase().includes(searchQuery.toLowerCase()) // Cambio 'nombre' por 'title'
+    doc.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="biblioteca-container">
       <h1>Biblioteca de Documentos</h1>
       <Buscador searchQuery={searchQuery} onSearch={setSearchQuery} />
-      <div className="documentos-grid">
-        {loading ? (
-          // Mostrar skeleton mientras cargan los documentos
-          <DocumentSkeleton />
-        ) : filteredDocumentos.length > 0 ? (
-          filteredDocumentos.map((doc) => (
-            // Utilizar DocumentToolResult para una vista más detallada
-            <DocumentToolResult
-              key={doc.id}
-              type="create"
-              result={doc}
-              block={{
-                documentId: doc.id,        // ID del documento
-                content: doc.content,      // Contenido del documento
-                title: doc.title,          // Título del documento
-                isVisible: true,           // Puedes ajustarlo según tu lógica (por ejemplo, con un estado)
-                status: 'idle',            // Ajusta el estado según corresponda
-                boundingBox: { top: 0, left: 0, width: 0, height: 0 }, // Puedes ajustar el boundingBox basado en el evento onClick
-              }}
-              setBlock={(value) => {}} // Implementa la función setBlock según tus necesidades
-            />
-          ))
-        ) : (
-          <p>No se encontraron documentos.</p>
-        )}
-      </div>
+
+      {selectedDoc ? (
+        <Editor
+          content={selectedDoc.content}
+          saveContent={() => {}}
+          status="idle"
+          isCurrentVersion={true}
+          currentVersionIndex={0}
+          suggestions={[]}  // Puedes ajustar las sugerencias si es necesario
+        />
+      ) : (
+        <div className="documentos-grid">
+          {loading ? (
+            <DocumentSkeleton />
+          ) : filteredDocumentos.length > 0 ? (
+            filteredDocumentos.map((doc) => (
+              <DocumentToolResult
+                key={doc.id}
+                type="create"
+                result={doc}
+                block={{
+                  documentId: doc.id,
+                  content: doc.content,
+                  title: doc.title,
+                  isVisible: true,
+                  status: 'idle',
+                  boundingBox: { top: 0, left: 0, width: 0, height: 0 },
+                }}
+                setBlock={(value) => {}}
+                onClick={() => setSelectedDoc(doc)} // Al hacer clic en un documento, se actualiza el estado
+              />
+            ))
+          ) : (
+            <p>No se encontraron documentos.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
