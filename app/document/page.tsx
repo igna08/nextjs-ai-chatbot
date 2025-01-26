@@ -1,40 +1,40 @@
-"use client"; // Asegúrate de incluir esto para el renderizado del cliente
+"use client";
 
 import { useState, useEffect } from "react";
-import DocumentoCard from "@/components/custom/Documentos/DocumentoCard"; // Asegúrate de que este componente exist
-import Buscador from "@/components/custom/Documentos/Buscador"; // Asegúrate de que este componente exist
+import DocumentoCard from "@/components/custom/Documentos/DocumentoCard";
+import Buscador from "@/components/custom/Documentos/Buscador";
 import axios from "axios";
-import { DocumentSkeleton } from "@/components/custom/document-skeleton"; // Importar el componente de esqueleto
-import { Editor } from "@/components/custom/editor"; // Importar el Editor
+import { DocumentSkeleton } from "@/components/custom/document-skeleton"; // Importar el Skeleton
+import { DocumentToolResult } from "@/components/custom/document"; // Importar DocumentToolResult
+import { Editor } from "@/components/custom/editor";  // Importar el Editor
+import { BotIcon } from "@/components/icons"; // Import > get the BotIcon component
 
 interface Documento {
   id: string;
   title: string;
   content: string;
   userId: string;
-  createdAt: string; // Puedes usar Date si es preferido
+  createdAt: string;
 }
 
 export default function Biblioteca() {
   const [searchQuery, setSearchQuery] = useState("");
   const [documentos, setDocumentos] = useState<Documento[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedDoc, setSelectedDoc] = useState<Documento | null>(null); // Estado del documento seleccionado
+  const [selectedDoc, setSelectedDoc] = useState<Documento | null>(null); // Estado para el documento seleccionado
 
-  // Efecto para cargar documentos al montar el componente
   useEffect(() => {
     fetchDocumentos();
   }, []);
 
-  // Función para cargar documentos desde la API
   const fetchDocumentos = async () => {
     try {
-      const respuesta = await axios.get("/api/documentos");
-      setDocumentos(respuesta.data);
+      const response = await axios.get("/api/documentos");
+      setDocumentos(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error al cargar documentos:", error);
-      setLoading(false); // Desactiva la carga en caso de error
+      setLoading(false);
     }
   };
 
@@ -44,28 +44,44 @@ export default function Biblioteca() {
 
   return (
     <div className="biblioteca-container">
-      <h1> Biblioteca de Documentos </h1>
+      <h1>Biblioteca de Documentos</h1>
       <Buscador searchQuery={searchQuery} onSearch={setSearchQuery} />
 
       {selectedDoc ? (
-        // Renderizar el Editor si hay un documento seleccionado
-        <Editor 
-          content={selectedDoc.content} 
-          saveContent={() => {}} 
-          status="idle" 
-          isCurrentVersion={true} 
-          currentVersionIndex={0} 
-          suggestions={[]} // Ajustar las sugerencias si es necesario 
+        <Editor
+          content={selectedDoc.content}
+          saveContent={() => {}}
+          status="idle"
+          isCurrentVersion={true}
+          currentVersionIndex={0}
+          suggestions={[]}  // Puedes ajustar las sugerencias si es necesario
         />
       ) : (
         <div className="documentos-grid">
           {loading ? (
-            // Mostrar skeleton mientras se cargan los documentos
             <DocumentSkeleton />
           ) : filteredDocumentos.length > 0 ? (
             filteredDocumentos.map((doc) => (
-              <div key={doc.id} onClick={() => setSelectedDoc(doc)}>
-                <DocumentoCard doc={doc} /> {/* Componente para mostrar un documento */}
+              <div key={doc.id} onClick={() => setSelectedDoc(doc)}>  {/* Contenedor para el onClick */}
+                <DocumentToolResult
+                  type="create"
+                  result={doc}
+                  block={{
+                    documentId: doc.id,
+                    content: doc.content,
+                    title: doc.title,
+                    isVisible: true,
+                    status: 'idle',
+                    boundingBox: { top: 0, left: 0, width: 0, height: 0 },
+                  }}
+                  setBlock={(value) => {}}
+                />
+                {/* Adding the BotIcon to represent the document */}
+                <div className="document-preview-icon">
+                  <BotIcon />
+                </div>
+                {/* Document Title */}
+                <h2 className="document-title">{doc.title}</h2>
               </div>
             ))
           ) : (
