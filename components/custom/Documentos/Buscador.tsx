@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, buttonVariants } from '@/ui/Button'; // Importa el componente Button y sus variantes
+import { Button } from '@/components/ui/button'; // Ruta corregida para importar el componente Button
 
 interface BuscadorProps {
   searchQuery: string;
