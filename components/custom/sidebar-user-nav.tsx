@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { type User } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
+import { useRouter } from 'next/navigation'; // Paso 1: Importar useRouter
 
 import {
   DropdownMenu,
@@ -20,6 +21,7 @@ import {
 
 export function SidebarUserNav({ user }: { user: User }) {
   const { setTheme, theme } = useTheme();
+  const router = useRouter(); // Inicializar router
 
   return (
     <SidebarMenu>
@@ -47,6 +49,13 @@ export function SidebarUserNav({ user }: { user: User }) {
               onSelect={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
               {`Toggle ${theme === 'light' ? 'dark' : 'light'} mode`}
+            </DropdownMenuItem>
+            {/* Paso 2: Añadir nuevo ítem de documentos */}
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onSelect={() => router.push('/document')}
+            >
+              Documentos generados
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
