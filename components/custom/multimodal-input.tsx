@@ -24,14 +24,14 @@ import { Textarea } from '../ui/textarea';
 
 const suggestedActions = [
   {
-    title: 'What is the weather',
-    label: 'in Misiones Argentina?',
-    action: 'What is the weather in Misiones Argentina?',
+    title: 'Draft a legal contract',
+    label: 'for a service agreement',
+    action: 'Draft a legal contract for a service agreement.',
   },
   {
-    title: 'Help me draft an essay',
-    label: 'about  IA',
-    action: 'Help me draft a short essay about  IA',
+    title: 'Prepare a confidentiality agreement',
+    label: 'for a new partnership',
+    action: 'Prepare a confidentiality agreement for a new partnership.',
   },
 ];
 
