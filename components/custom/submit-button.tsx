@@ -27,10 +27,3 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
     </Button>
   );
 }
-
-      <span aria-live="polite" className="sr-only" role="status">
-        {pending || isSuccessful ? 'Loading' : 'Submit form'}
-      </span>
-    </Button>
-  );
-}
