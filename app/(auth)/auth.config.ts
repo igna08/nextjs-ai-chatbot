@@ -10,22 +10,23 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-     authorized({ auth, request: { nextUrl } }) {
-       const isLoggedIn = !!auth?.user;
-       const isOnLogin = nextUrl.pathname.startsWith('/login');
-       const isOnRegister = nextUrl.pathname.startsWith('/register');
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnLogin = nextUrl.pathname.startsWith('/login');
+      const isOnRegister = nextUrl.pathname.startsWith('/register');
 
-       // Redirigir usuarios autenticados que intentan acceder a login o registro
-       if (isLoggedIn && (isOnLogin || isOnRegister)) {
-         return Response.redirect(new URL('/', nextUrl));
-       }
+      // Redirigir usuarios autenticados que intentan acceder a login o registro
+      if (isLoggedIn && (isOnLogin || isOnRegister)) {
+        return Response.redirect(new URL('/', nextUrl));
+      }
 
-       // Permitir acceso a las páginas de login y registro sin autenticación
-       if (isOnLogin || isOnRegister) {
-         return true;
-       }
+      // Permitir acceso a las páginas de login y registro sin autenticación
+      if (isOnLogin || isOnRegister) {
+        return true;
+      }
 
-       // Requerir autenticación para otras rutas
-       return isLoggedIn;
-     },
-   },
+      // Requerir autenticación para otras rutas
+      return isLoggedIn;
+    },
+  },
+}; // Ensure this closing brace is present
