@@ -15,10 +15,10 @@ export const authConfig: NextAuthConfig = {
       auth,
       request,
     }: {
-      auth: { user?: { id: string; email: string } } | null; // Tipado para auth
+      auth: { user?: { id: string; email: string } } | null; // Asegúrate de que 'auth' se maneje correctamente
       request: NextRequest; // Tipado para request
     }) {
-      const isLoggedIn = !!auth?.user; // Verifica si el usuario está autenticado
+      const isLoggedIn = !!(auth?.user?.id && auth?.user?.email); // Verifica si el usuario está autenticado
       const isOnLogin = request.nextUrl.pathname.startsWith('/login'); // Verifica si está en la página de login
       const isOnRegister = request.nextUrl.pathname.startsWith('/register'); // Verifica si está en la página de registro
 
