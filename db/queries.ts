@@ -279,8 +279,3 @@ export async function getSuggestionsByDocumentId({
   }
 }
 
-      "Failed to get suggestions by document version from database",
-    );
-    throw error;
-  }
-}
