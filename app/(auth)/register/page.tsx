@@ -48,8 +48,8 @@ export default function Page() {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <img
-            src="https://i.postimg.cc/SxxPVXp8/Linber-ai-2-removebg-preview.png"
-            alt="Linber AI"
+            src="https://i.postimg.cc/cH0NTcgX/pixelcut-export-1.png"
+            alt="AbogaBot AI"
             className="w-32 h-auto"
           />
         </div>
