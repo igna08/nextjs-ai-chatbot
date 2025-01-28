@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 export const Overview = () => {
-  const sentence = "¿En qué puedo ayudarte?";
+  const sentence = "¿En qué puedo ayudarte abogado/a?";
   const typingVariants = {
     hidden: { opacity: 1 },
     visible: {
