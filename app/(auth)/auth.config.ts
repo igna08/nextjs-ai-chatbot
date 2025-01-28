@@ -10,30 +10,22 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnChat = nextUrl.pathname.startsWith('/');
-      const isOnRegister = nextUrl.pathname.startsWith('/register');
-      const isOnLogin = nextUrl.pathname.startsWith('/login');
+     authorized({ auth, request: { nextUrl } }) {
+       const isLoggedIn = !!auth?.user;
+       const isOnLogin = nextUrl.pathname.startsWith('/login');
+       const isOnRegister = nextUrl.pathname.startsWith('/register');
 
-      if (isLoggedIn && (isOnLogin || isOnRegister)) {
-        return Response.redirect(new URL('/', nextUrl as unknown as URL));
-      }
+       // Redirigir usuarios autenticados que intentan acceder a login o registro
+       if (isLoggedIn && (isOnLogin || isOnRegister)) {
+         return Response.redirect(new URL('/', nextUrl));
+       }
 
-      if (isOnRegister || isOnLogin) {
-        return true; // Always allow access to register and login pages
-      }
+       // Permitir acceso a las páginas de login y registro sin autenticación
+       if (isOnLogin || isOnRegister) {
+         return true;
+       }
 
-      if (isOnChat) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      }
-
-      if (isLoggedIn) {
-        return Response.redirect(new URL('/', nextUrl as unknown as URL));
-      }
-
-      return true;
-    },
-  },
-} satisfies NextAuthConfig;
+       // Requerir autenticación para otras rutas
+       return isLoggedIn;
+     },
+   },
