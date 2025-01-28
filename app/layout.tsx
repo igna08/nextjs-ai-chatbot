@@ -7,8 +7,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Tuc AI Chatbot by LinberAI',
-  description: ' chatbot deployed by LinberAI at Misiones Argentina.',
+  title: 'AbogaBot Assistand by LinberAI',
+  description: '  Legal AI Assistant deployed by LinberAI at Misiones Argentina.',
 };
 
 export const viewport = {
