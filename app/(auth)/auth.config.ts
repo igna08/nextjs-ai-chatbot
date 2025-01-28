@@ -6,8 +6,7 @@ export const authConfig = {
     newUser: '/',
   },
   providers: [
-    // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
-    // while this file is also used in non-Node.js environments
+    // Los proveedores se configuran en un entorno compatible con Node.js
   ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -28,5 +27,5 @@ export const authConfig = {
       // Requerir autenticación para otras rutas
       return isLoggedIn;
     },
-  },
-}; // Ensure this closing brace is present
+  }, // Esto cierra correctamente el objeto "callbacks"
+};
