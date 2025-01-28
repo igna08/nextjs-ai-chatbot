@@ -1,39 +1,39 @@
 import type { NextAuthConfig } from 'next-auth';
-import { NextRequest } from 'next/server';
 
-export const authConfig: NextAuthConfig = {
+export const authConfig = {
   pages: {
-    signIn: '/login', // Página de inicio de sesión
-    newUser: '/', // Página de nuevo usuario
+    signIn: '/login',
+    newUser: '/',
   },
   providers: [
-    // Aquí configuramos los proveedores de autenticación
-    // Ejemplo: Credentials, Google, etc.
+    // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
+    // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    async authorized({
-      auth,
-      request,
-    }: {
-      auth: { user?: { id: string; email: string } } | null; // Asegúrate de que 'auth' se maneje correctamente
-      request: NextRequest; // Tipado para request
-    }) {
-      const isLoggedIn = !!(auth?.user?.id && auth?.user?.email); // Verifica si el usuario está autenticado
-      const isOnLogin = request.nextUrl.pathname.startsWith('/login'); // Verifica si está en la página de login
-      const isOnRegister = request.nextUrl.pathname.startsWith('/register'); // Verifica si está en la página de registro
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnChat = nextUrl.pathname.startsWith('/');
+      const isOnRegister = nextUrl.pathname.startsWith('/register');
+      const isOnLogin = nextUrl.pathname.startsWith('/login');
 
-      // Redirigir usuarios autenticados que intentan acceder a login o registro
       if (isLoggedIn && (isOnLogin || isOnRegister)) {
-        return Response.redirect(new URL('/', request.nextUrl));
+        return Response.redirect(new URL('/', nextUrl as unknown as URL));
       }
 
-      // Permitir acceso a las páginas de login y registro sin autenticación
-      if (isOnLogin || isOnRegister) {
-        return true;
+      if (isOnRegister || isOnLogin) {
+        return true; // Always allow access to register and login pages
       }
 
-      // Requerir autenticación para otras rutas
-      return isLoggedIn;
+      if (isOnChat) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      }
+
+      if (isLoggedIn) {
+        return Response.redirect(new URL('/', nextUrl as unknown as URL));
+      }
+
+      return true;
     },
   },
-};
+} satisfies NextAuthConfig;
