@@ -20,30 +20,16 @@ export const login = async (
   formData: FormData,
 ): Promise<LoginActionState> => {
   try {
-    // Validar los datos del formulario
     const validatedData = authFormSchema.parse({
       email: formData.get('email'),
       password: formData.get('password'),
     });
 
-    // Intentar iniciar sesión
-    const result = await signIn('credentials', {
+    await signIn('credentials', {
       email: validatedData.email,
       password: validatedData.password,
-      redirect: false, // Desactiva la redirección automática
+      redirect: false,
     });
-
-    // Verificar si el inicio de sesión fue exitoso
-    if (result?.error) {
-      console.error('Error during sign-in:', result.error);
-      return { status: 'failed' };
-    }
-
-    // Redirigir manualmente después de un inicio de sesión exitoso
-    if (result?.url) {
-      // Redirige a la URL de callback o a la página principal
-      window.location.href = result.url; // O usa tu framework de routing
-    }
 
     return { status: 'success' };
   } catch (error) {
@@ -51,7 +37,6 @@ export const login = async (
       return { status: 'invalid_data' };
     }
 
-    console.error('Unexpected error during login:', error);
     return { status: 'failed' };
   }
 };
@@ -71,39 +56,22 @@ export const register = async (
   formData: FormData,
 ): Promise<RegisterActionState> => {
   try {
-    // Validar los datos del formulario
     const validatedData = authFormSchema.parse({
       email: formData.get('email'),
       password: formData.get('password'),
     });
 
-    // Verificar si el usuario ya existe
     const [user] = await getUser(validatedData.email);
+
     if (user) {
-      return { status: 'user_exists' };
+      return { status: 'user_exists' } as RegisterActionState;
     }
-
-    // Crear el nuevo usuario
     await createUser(validatedData.email, validatedData.password);
-
-    // Iniciar sesión automáticamente después del registro
-    const result = await signIn('credentials', {
+    await signIn('credentials', {
       email: validatedData.email,
       password: validatedData.password,
-      redirect: false, // Desactiva la redirección automática
+      redirect: false,
     });
-
-    // Verificar si el inicio de sesión fue exitoso
-    if (result?.error) {
-      console.error('Error during sign-in after registration:', result.error);
-      return { status: 'failed' };
-    }
-
-    // Redirigir manualmente después de un inicio de sesión exitoso
-    if (result?.url) {
-      // Redirige a la URL de callback o a la página principal
-      window.location.href = result.url; // O usa tu framework de routing
-    }
 
     return { status: 'success' };
   } catch (error) {
@@ -111,7 +79,6 @@ export const register = async (
       return { status: 'invalid_data' };
     }
 
-    console.error('Unexpected error during registration:', error);
     return { status: 'failed' };
   }
 };
