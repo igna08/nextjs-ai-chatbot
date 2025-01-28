@@ -1,22 +1,30 @@
 import type { NextAuthConfig } from 'next-auth';
+import { NextRequest } from 'next/server';
 
-export const authConfig = {
+export const authConfig: NextAuthConfig = {
   pages: {
-    signIn: '/login',
-    newUser: '/',
+    signIn: '/login', // Página de inicio de sesión
+    newUser: '/', // Página de nuevo usuario
   },
   providers: [
-    // Los proveedores se configuran en un entorno compatible con Node.js
+    // Aquí configuramos los proveedores de autenticación
+    // Ejemplo: Credentials, Google, etc.
   ],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnLogin = nextUrl.pathname.startsWith('/login');
-      const isOnRegister = nextUrl.pathname.startsWith('/register');
+    async authorized({
+      auth,
+      request,
+    }: {
+      auth: { user?: { id: string; email: string } } | null; // Tipado para auth
+      request: NextRequest; // Tipado para request
+    }) {
+      const isLoggedIn = !!auth?.user; // Verifica si el usuario está autenticado
+      const isOnLogin = request.nextUrl.pathname.startsWith('/login'); // Verifica si está en la página de login
+      const isOnRegister = request.nextUrl.pathname.startsWith('/register'); // Verifica si está en la página de registro
 
       // Redirigir usuarios autenticados que intentan acceder a login o registro
       if (isLoggedIn && (isOnLogin || isOnRegister)) {
-        return Response.redirect(new URL('/', nextUrl));
+        return Response.redirect(new URL('/', request.nextUrl));
       }
 
       // Permitir acceso a las páginas de login y registro sin autenticación
@@ -27,5 +35,5 @@ export const authConfig = {
       // Requerir autenticación para otras rutas
       return isLoggedIn;
     },
-  }, // Esto cierra correctamente el objeto "callbacks"
+  },
 };
