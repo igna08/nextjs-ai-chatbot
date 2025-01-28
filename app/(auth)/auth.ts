@@ -30,14 +30,14 @@ export const {
 
         const users = await getUser(email);
         if (users.length === 0) return null;
-        
+
         const passwordsMatch = await compare(password, users[0].password!);
         if (!passwordsMatch) return null;
-        
+
+        // Devuelve solo las propiedades necesarias
         return {
           id: users[0].id,
           email: users[0].email,
-          name: users[0].name,
         };
       },
     }),
